@@ -34,14 +34,14 @@ export const todoSlice = createSlice({
             state.todos.push(todo)
         },
 
-        toggleComplete: (state, action:PayloadAction<string | boolean>) => {
-            const toggledTodo = state.todos.find((todo) => todo.id === action.payload)
+        toggleComplete: (state, action:PayloadAction<string>) => {
+            const toggledTodo = state.todos.find(todo => todo.id === action.payload)
             if (toggledTodo) {
             toggledTodo.completed = !toggledTodo.completed
             }
         },
 
-        deleteTodo: (state, action: PayloadAction<string>) => {
+        deleteTodo: (state, action:PayloadAction<string>) => {
             state.todos = state.todos.filter((todo) => todo.id !== action.payload)
         },
 
