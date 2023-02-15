@@ -5,8 +5,8 @@ const TotalCompleteItems: React.FC = () => {
     const completeTodos = useAppSelector((state) => state.todos.todos.filter(todo => todo.completed))
 
     return (
-        <div>
-            TotalCompleteItems: {completeTodos.length}
+        <div className='completed-items'>
+            <span>Total Complete Items: {completeTodos.length}</span>
         </div>
     );
 };
