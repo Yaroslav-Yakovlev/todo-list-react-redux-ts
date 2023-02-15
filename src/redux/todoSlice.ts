@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {nanoid} from "nanoid";
 
-type Todo = {
+export type Todo = {
     id: string,
     title: string,
     completed: boolean,
 }
 
-type TodosState = {
+export type TodosState = {
     todos: Todo[],
     statusTodo: string,
     statusLoading: string,
