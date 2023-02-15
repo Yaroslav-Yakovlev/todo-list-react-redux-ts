@@ -1,14 +1,18 @@
 import React from 'react';
-import {useAppSelector} from '../hooks'
 import TodoItem from "./TodoItem";
+import {Todo} from "../redux/todoSlice";
 
-const TodoList: React.FC = () => {
-    const {todos} = useAppSelector(state => state.todos)
+interface TodoListProps {
+    filteredTodos: Todo[],
+}
+
+const TodoList: React.FC<TodoListProps> = ({filteredTodos}) => {
+
 
     return (
         <div className='todo-container'>
             <ul className='todo-list'>
-                {todos.map((todo) => (
+                {filteredTodos.map((todo) => (
                     <TodoItem
                         key={todo.id}
                         id={todo.id}

@@ -1,9 +1,12 @@
 import React from 'react';
+import {useAppSelector} from "../hooks";
 
 const TotalCompleteItems: React.FC = () => {
+    const completeTodos = useAppSelector((state) => state.todos.todos.filter(todo => todo.completed))
+
     return (
         <div>
-            TotalCompleteItems
+            TotalCompleteItems: {completeTodos.length}
         </div>
     );
 };
