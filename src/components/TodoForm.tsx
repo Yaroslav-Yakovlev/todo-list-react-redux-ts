@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useAppDispatch} from "../hooks";
-import {addTodo, filterTodos} from '../redux/todoSlice'
+import {addTodo, filterTodos, getTodosAsync} from '../redux/todoSlice'
+
 
 const  TodoForm: React.FC = () => {
     const [value, setValue] = useState('')
@@ -20,6 +21,10 @@ const  TodoForm: React.FC = () => {
         const {value} = event.target;
         dispatch(filterTodos(value))
     }
+
+    useEffect(() => {
+        dispatch(getTodosAsync())
+    }, [dispatch])
 
 
     return (
