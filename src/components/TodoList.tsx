@@ -9,8 +9,16 @@ interface TodoListProps {
 }
 
 const TodoList: React.FC<TodoListProps> = ({filteredTodos}) => {
-    const statusLoading = useAppSelector(state => state.todos.statusLoading)
+    const {statusLoading, error} = useAppSelector(state => state.todos)
+    console.log(error)
 
+    if (error) {
+        return (
+            <div className='todo-container'>
+                <h1> Error {error}</h1>
+            </div>
+        )
+    }
 
     const renderTodos = () =>
         (
