@@ -10,7 +10,6 @@ interface TodoListProps {
 
 const TodoList: React.FC<TodoListProps> = ({filteredTodos}) => {
     const {statusLoading, error} = useAppSelector(state => state.todos)
-    console.log(error)
 
     if (error) {
         return (
