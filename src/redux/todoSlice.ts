@@ -1,7 +1,6 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {nanoid} from "nanoid";
 
-
 export type Todo = {
     id: string,
     title: string,
@@ -15,7 +14,6 @@ export type TodosState = {
     error: string | null ,
 }
 
-
 export const getTodosAsync = createAsyncThunk<Todo[], undefined, {rejectValue: string}>(
     'todos/TodosAsync',
     async function (_,  {rejectWithValue}) {
@@ -28,12 +26,10 @@ export const getTodosAsync = createAsyncThunk<Todo[], undefined, {rejectValue: s
             if (error instanceof Error) {
 
                 return rejectWithValue(error.message)
-
             }
         }
 
     }
-
 )
 
 export const todoSlice = createSlice({
@@ -88,7 +84,6 @@ export const todoSlice = createSlice({
                 }
                 state.statusLoading = false
             })
-
     }
 })
 
