@@ -18,15 +18,20 @@ export type TodosState = {
 
 export const getTodosAsync = createAsyncThunk<Todo[], undefined, {rejectValue: string}>(
     'todos/TodosAsync',
-    async function (_, {rejectWithValue}) {
-            const response = await fetch('https://jsonplaceholder.typicode!!.com/todos?_limit=10')
-
-            if (!response.ok) {
-                return rejectWithValue('Error')
-
-            }
+    async function (_,  {rejectWithValue}) {
+        try {
+            const response = await fetch('https://jsonplaceholder.typicode.com/todos?_limit=10')
 
             return await response.json()
+        } catch (error) {
+
+            if (error instanceof Error) {
+
+                return rejectWithValue(error.message)
+
+            }
+        }
+
     }
 
 )
