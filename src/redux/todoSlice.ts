@@ -12,21 +12,28 @@ export type TodosState = {
     todos: Todo[],
     statusTodo: string,
     statusLoading: boolean,
-    error: string | null,
+    error: string | null ,
 }
 
 
 export const getTodosAsync = createAsyncThunk<Todo[], undefined, {rejectValue: string}>(
     'todos/TodosAsync',
-    async function (_, {rejectWithValue}) {
+    async function (_,  {rejectWithValue}) {
+        try {
             const response = await fetch('https://jsonplaceholder.typicode.com/todos?_limit=10')
 
-            if (!response.ok) {
-                return rejectWithValue ('Error!')
-            }
-
             return await response.json()
+        } catch (error) {
+
+            if (error instanceof Error) {
+
+                return rejectWithValue(error.message)
+
+            }
+        }
+
     }
+
 )
 
 export const todoSlice = createSlice({
@@ -68,7 +75,6 @@ export const todoSlice = createSlice({
         builder
             .addCase(getTodosAsync.pending, (state) => {
                 state.statusLoading = true
-                state.error = null
             })
 
             .addCase(getTodosAsync.fulfilled, (state, action) => {
@@ -76,9 +82,13 @@ export const todoSlice = createSlice({
                 state.statusLoading = false
             })
 
-            .addCase(getTodosAsync.rejected, (state) => {
+            .addCase(getTodosAsync.rejected, (state, action) => {
+                if (action.payload) {
+                    state.error = action.payload
+                }
                 state.statusLoading = false
             })
+
     }
 })
 
