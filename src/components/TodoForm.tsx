@@ -5,7 +5,7 @@ import {addTodo, filterTodos} from '../redux/todoSlice'
 
 const  TodoForm: React.FC = () => {
     const [value, setValue] = useState('')
-    
+
     const dispatch = useAppDispatch()
 
     const addTodosHandler = (event:React.ChangeEvent<HTMLFormElement>) => {
